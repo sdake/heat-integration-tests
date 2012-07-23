@@ -24,7 +24,11 @@ config_yum() {
 install_packages() {
     echo "Installing essential packages..." 1>&2
 
-    yum -y install libvirt
+    yum -y install libvirt git
+
+    # Oz requirements for installation from source
+    yum -y install oz make rpm-build
+    yum -y erase oz
 }
 
 start_daemons() {
