@@ -62,6 +62,6 @@ install_test_scripts() {
     echo "Installing test scripts..."
     install -o $TEST_USER -g $TEST_USER heat-test.sh ${HOME_DIR}/
     if [ -n "$source_script" ]; then
-        install -o $TEST_USER -g $TEST_USER $source_script -m 644 ${HOME_DIR}/get_source.sh
+        install -o $TEST_USER -g $TEST_USER $source_script -m 644 ${HOME_DIR}/get-source.sh
     fi
 }
