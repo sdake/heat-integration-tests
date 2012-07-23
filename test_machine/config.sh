@@ -4,5 +4,5 @@ TEST_USER=heat_test
 GET_SOURCE_SCRIPT=heat-github-source.sh
 
 # Fedora ISO version
-VERSION=16
+GUEST_VERSION=16
 ARCH=x86_64
