@@ -3,6 +3,11 @@ Integration test machine scripts
 
 To run the integration test:
 
+Configuration
+-------------
+
+Edit the file ``config.sh`` to change the parameters of the test.
+
 Copy scripts
 ------------
 
