@@ -17,4 +17,4 @@ start_daemons
 get_iso
 
 configure_test_user
-install_test_script $GET_SOURCE_SCRIPT
+install_test_scripts $GET_SOURCE_SCRIPT
