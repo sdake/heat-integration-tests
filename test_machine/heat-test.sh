@@ -28,7 +28,7 @@ clean_up() {
 
 get_source $HEAT_DIR
 run_test
-clean_up
+#clean_up
 
 if [ "${TEST_RESULT}" -ne 0 ]; then
     echo "FAILED :("
