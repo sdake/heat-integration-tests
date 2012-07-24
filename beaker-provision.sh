@@ -13,11 +13,15 @@ provision_machine() {
     echo "Distro Id: $distro"
 
     bkr system-reserve $machine
-    bkr system-provision --distro `fedora_distro_id` $machine
 
-    sleep 20
-    wait_for_networking $machine
-    sleep 10
+    if [ $? -ne 0 ]; then
+        exit 2
+    fi
+
+    bkr system-provision --distro `fedora_distro_id` $machine  &&  \
+    sleep 20                                                   &&  \
+    wait_for_networking $machine                               &&  \
+    sleep 10                                                   &&  \
     wait_for_reboot $machine
 }
 

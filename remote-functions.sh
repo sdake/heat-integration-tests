@@ -11,6 +11,9 @@ wait_for_networking() {
 
     if [ ! $retries -ge 0 ]; then
         echo "Timed out." >&2
+        false
+    else
+        true
     fi
 }
 
@@ -25,6 +28,9 @@ wait_for_reboot() {
 
     if [ ! $retries -ge 0 ]; then
         echo "Timed out." >&2
+        false
+    else
+        true
     fi
 }
 
@@ -39,6 +45,9 @@ wait_for_ssh() {
 
     if [ ! $retries -ge 0 ]; then
         echo "Timed out." >&2
+        false
+    else
+        true
     fi
 }
 
@@ -55,8 +64,12 @@ set_up() {
     echo "Copying scripts to test machine..." >&2
     scp ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE test_machine/*.sh ${SSH_USER:-root}@${MACHINE}:
 
-    echo "Configuring test machine..." >&2
-    ssh -t -t ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${SSH_USER:-root}@${MACHINE} ./integration-setup.sh
+    if [ $? = 0 ]; then
+        echo "Configuring test machine..." >&2
+        ssh -t -t ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${SSH_USER:-root}@${MACHINE} ./integration-setup.sh
+    else
+        false
+    fi
 }
 
 run_test() {
