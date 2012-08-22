@@ -2,10 +2,6 @@
 
 HOME_DIR=/home/${TEST_USER}
 
-ISO_IMAGE=Fedora-${GUEST_VERSION}-${ARCH}-DVD.iso
-IMAGE_DIR=/var/lib/libvirt/images
-
-
 config_yum() {
     # F16 requires OpenStack Preview repo
     if [ `yum info fedora-release | grep ^Version | cut -d: -f 2` = 16 ]; then
@@ -37,16 +33,6 @@ start_daemons() {
     systemctl start libvirtd.service
     # this is a hack to force udev rules to be applied to /dev/kvm
     udevadm trigger
-}
-
-get_iso() {
-    if [ ! -f ${IMAGE_DIR}/${ISO_IMAGE} ]; then
-        echo "Downloading Fedora $GUEST_VERSION $ARCH ISO..." 1>&2
-
-        pushd $IMAGE_DIR
-        wget http://archive.fedoraproject.org/pub/fedora/linux/releases/${GUEST_VERSION}/Fedora/${ARCH}/iso/${ISO_IMAGE}
-        popd
-    fi
 }
 
 configure_test_user() {

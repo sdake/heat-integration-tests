@@ -5,6 +5,7 @@
 
 . config.sh
 . integration-functions.sh
+. iso-functions.sh
 
 if [[ ${EUID} -ne 0 ]]; then
     echo "This script must be run as root"
