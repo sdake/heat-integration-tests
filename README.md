@@ -37,8 +37,14 @@ directory for more information.
 Running remotely
 ----------------
 
-Run the tests using the script:
+Run the tests from the directory containing the checked out copy of Heat that
+you want to test:
 
 ```
-> ./remote-test.sh
+[user@host heat]$ /path/to/heat-integration-tests/remote-test.sh
 ```
+
+Alternatively, by setting ``GET_SOURCE_SCRIPT`` in ``test_machine/config.sh``
+to ``heat-github-source.sh`` (instead of ``heat-tarball-source.sh``) you can
+configure the test to check out the latest source from GitHub. In this case,
+the script can be run from anywhere.

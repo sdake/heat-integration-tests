@@ -62,7 +62,12 @@ delete_host_key() {
 
 set_up() {
     echo "Copying scripts to test machine..." >&2
-    scp ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${script_dir}/test_machine/*.sh ${SSH_USER:-root}@${MACHINE}:
+
+    local files="${script_dir}/test_machine/*.sh"
+    if [ -n "${SOURCE_TARBALL}" ] && [ -e "$SOURCE_TARBALL" ]; then
+        files="${files} ${SOURCE_TARBALL}"
+    fi
+    scp ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${files} ${SSH_USER:-root}@${MACHINE}:
 
     if [ $? = 0 ]; then
         echo "Configuring test machine..." >&2
@@ -78,3 +83,6 @@ run_test() {
     ssh -t -t ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${SSH_USER:-root}@${MACHINE} sudo -u $TEST_USER /home/${TEST_USER}/heat-test.sh
 }
 
+make_tarball() {
+    tar -cz * >${SOURCE_TARBALL:?}
+}

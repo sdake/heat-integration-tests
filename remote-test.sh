@@ -32,6 +32,7 @@ check_result $?
 wait_for_networking $MACHINE && wait_for_ssh $MACHINE
 check_result $?
 
+make_tarball
 set_up
 check_result $?
 

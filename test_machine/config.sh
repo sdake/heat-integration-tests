@@ -1,7 +1,8 @@
 # Configuration for the machine running the integration test
 
 TEST_USER=heattest
-GET_SOURCE_SCRIPT=heat-github-source.sh
+SOURCE_TARBALL=heat.tgz
+GET_SOURCE_SCRIPT=heat-tarball-source.sh
 
 # Fedora ISO version - needs to match integration environment (getting started)
 GUEST_VERSION=16

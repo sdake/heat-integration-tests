@@ -70,4 +70,7 @@ install_test_scripts() {
     if [ -n "$source_script" ]; then
         install -o $TEST_USER -g $TEST_USER $source_script -m 644 ${HOME_DIR}/get-source.sh
     fi
+    if [ -e $SOURCE_TARBALL ]; then
+        install -o $TEST_USER -g $TEST_USER $SOURCE_TARBALL ${HOME_DIR}/
+    fi
 }
