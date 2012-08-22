@@ -27,6 +27,12 @@ The variable ``SSH_KEY_FILE`` can also be set to the location of an SSH
 identity (private key) file which is authorised to log in to the account
 specified by ``SSH_USER`` (or root by default) on the provisioned machine.
 
+By setting ``ALLOW_ISO_COPY`` to ``yes`` and installing the Fedora ISO in
+``/var/lib/libvirt/images``, you can cause the script to copy the ISO from
+the local machine to the test machine rather than downloading it from the
+Fedora project directly. This speeds things up considerably if both
+machines are co-located on the same network.
+
 Remote configuration
 --------------------
 

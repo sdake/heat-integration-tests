@@ -69,6 +69,11 @@ set_up() {
     fi
     scp ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${files} ${SSH_USER:-root}@${MACHINE}:
 
+    if [ "${ALLOW_ISO_COPY:0:1}" = "y" ] && [ -e ${IMAGE_DIR}/${ISO_IMAGE} ]; then
+        echo "Copying Fedora ISO to test machine..." >&2
+        scp ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${IMAGE_DIR}/${ISO_IMAGE} ${SSH_USER:-root}@${MACHINE}:${IMAGE_DIR}
+    fi
+
     if [ $? = 0 ]; then
         echo "Configuring test machine..." >&2
         ssh -t -t ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${SSH_USER:-root}@${MACHINE} ./integration-setup.sh
