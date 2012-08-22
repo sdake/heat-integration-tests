@@ -2,11 +2,13 @@
 
 # Script to provision a remote machine and run a test on it
 
-. config.sh
-. test_machine/config.sh
+script_dir=$(dirname $0)
 
-. beaker-provision.sh
-. remote-functions.sh
+. ${script_dir}/config.sh
+. ${script_dir}/test_machine/config.sh
+
+. ${script_dir}/beaker-provision.sh
+. ${script_dir}/remote-functions.sh
 
 if [ -z "$MACHINE" ]; then
     echo "Specify the MACHINE to provision in setup.sh" >&2

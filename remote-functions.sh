@@ -62,7 +62,7 @@ delete_host_key() {
 
 set_up() {
     echo "Copying scripts to test machine..." >&2
-    scp ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE test_machine/*.sh ${SSH_USER:-root}@${MACHINE}:
+    scp ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${script_dir}/test_machine/*.sh ${SSH_USER:-root}@${MACHINE}:
 
     if [ $? = 0 ]; then
         echo "Configuring test machine..." >&2
