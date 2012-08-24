@@ -35,6 +35,8 @@ start_daemons() {
     echo "Starting essential daemons..." 1>&2
 
     systemctl start libvirtd.service
+    # this is a hack to force udev rules to be applied to /dev/kvm
+    udevadm trigger
 }
 
 get_iso() {
