@@ -10,7 +10,7 @@ cd `dirname $0`
 . get-source.sh
 
 run_test() {
-    echo "Running integration test..." 1>&2
+    echo "Install integration test environment..." 1>&2
 
     pushd $HEAT_DIR
     bash -c "$(./tools/rst2script.sed ./docs/GettingStarted.rst)"

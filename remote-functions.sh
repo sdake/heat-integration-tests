@@ -38,7 +38,7 @@ wait_for_ssh() {
     local server="$1"
 
     local retries=49
-    while ! ssh ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE $server uptime && ((retries-- > 0)); do
+    while ! ssh -o StrictHostKeyChecking=no ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${SSH_USER:-root}@${MACHINE} uptime && ((retries-- > 0)); do
         echo "Waiting for host SSH service..." >&2
         sleep 5
     done
