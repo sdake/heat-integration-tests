@@ -18,6 +18,14 @@ run_test() {
     popd
 }
 
+install_test_deps() {
+    echo "Install test dependencies..." 1>&2
+
+    pushd $HEAT_DIR
+    yum -y install `sed '/^$/d;/^\#/d' ./tools/test-requires-rpm`
+    popd
+}
+
 clean_up() {
     echo "Cleaning up..." 1>&2
 
@@ -28,6 +36,7 @@ clean_up() {
 
 get_source $HEAT_DIR
 run_test
+install_test_deps
 #clean_up
 
 if [ "${TEST_RESULT}" -ne 0 ]; then
