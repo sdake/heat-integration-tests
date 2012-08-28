@@ -8,7 +8,7 @@ Prerequisites
 
 Obtain a Kerberos keytab with permission to provision the server in Beaker.
 
-_`Obtain a service account`: http://ci.openstack.org/third_party.html#requesting-a-service-account
+.. _`Obtain a service account`: http://ci.openstack.org/third_party.html#requesting-a-service-account
 
 Installation
 ------------
@@ -27,7 +27,7 @@ Keys will be stored in ``/var/lib/jenkins/.ssh/``. The public key needs to be in
 
 Install the Jenkins GIT plugin (from the standard list) and the OpenStack version of the `Gerrit Trigger plugin`_.
 
-_`Gerrit trigger plugin`: https://jenkins.openstack.org/view/All/job/gerrit-trigger-plugin-package/lastSuccessfulBuild/artifact/gerrithudsontrigger/target/gerrit-trigger.hpi
+.. _`Gerrit trigger plugin`: https://jenkins.openstack.org/view/All/job/gerrit-trigger-plugin-package/lastSuccessfulBuild/artifact/gerrithudsontrigger/target/gerrit-trigger.hpi
 
 Install a beaker configuration file at ``/var/lib/jenkins/.beaker_client/config`` that sets the ``HUB_URL``, ``AUTH_METHOD = "krbv"`` and ``KRB_REALM``. Set up the Kerberos keytab to allow Jenkins to authenticate to Beaker.
 
