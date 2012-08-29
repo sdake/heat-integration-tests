@@ -65,7 +65,9 @@ Click "Advanced..." to configure the actual Gerrit commands:
 * Started: blank
 * Successful: ``gerrit approve <CHANGE>,<PATCHSET> --message 'Integration Test Successful <BUILDS_STATS>' --verified <VERIFIED> --code-review <CODE_REVIEW>``
 * Failed: ``gerrit approve <CHANGE>,<PATCHSET> --message 'Integration Test Failed <BUILDS_STATS>' --verified <VERIFIED> --code-review <CODE_REVIEW>``
-* Unstable: ``gerrit approve <CHANGE>,<PATCHSET> --message 'Integration Test Unstable <BUILDS_STATS>' --verified <VERIFIED> --code-review <CODE_REVIEW>``
+* Unstable: blank
+
+These commands can be overridden per-project by setting them in the "Advanced..." section of the project configuration instead.
 
 Create a new "Heat" test project with the following configuration:
 
@@ -77,7 +79,7 @@ Create a new "Heat" test project with the following configuration:
   * Branch Specifier: ``$GERRIT_BRANCH``
 
 * Build Triggers: Gerrit event
-* Gerrit Trigger: Trigger on Patchset Uploaded
+* Gerrit Trigger: Trigger on Change Merged
 * Gerrit Project:
 
   * Project: Plain ``heat-api/heat``
@@ -93,3 +95,5 @@ Test with the dev server
 OpenStack have a Gerrit server for development purposes that is safe to use for testing. The SSL certificate on this server is self-signed, so in order to use it you must set the ``git config`` option ``http.sslVerify false`` in the file ``/var/lib/jenkins/.gitconfig``.
 
 To use this server, change ``review.openstack.org`` in the config above to ``review-dev.openstack.org`` and ``heat-api/heat`` to ``gtest-org/test`` (or one of the other test projects).
+
+It is also easier to test with triggering on Patchset Uploaded rather than Change Merged.
