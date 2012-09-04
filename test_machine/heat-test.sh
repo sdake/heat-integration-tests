@@ -9,7 +9,7 @@ cd `dirname $0`
 
 . get-source.sh
 
-setup_env() {
+run_getting_started() {
     echo "Install integration test environment..." 1>&2
 
     pushd $HEAT_DIR
@@ -29,7 +29,7 @@ install_test_deps() {
 run_tests() {
     pushd $HEAT_DIR
     ./run_tests.sh -a tag=func
-    # TODO: need to check error code or collect nose output
+    TEST_RESULT=$?
     popd
 }
 
@@ -42,9 +42,13 @@ clean_up() {
 }
 
 get_source $HEAT_DIR
-setup_env
-install_test_deps
-run_tests
+run_getting_started
+
+if [ "${TEST_RESULT}" = 0 ]; then
+    install_test_deps
+    run_tests
+fi
+
 #clean_up
 
 if [ "${TEST_RESULT}" -ne 0 ]; then
