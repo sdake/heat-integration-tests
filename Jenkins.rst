@@ -25,7 +25,7 @@ Generate SSH keys::
 
 Keys will be stored in ``/var/lib/jenkins/.ssh/``. The public key needs to be installed in the account on the server that Jenkins will be using to post comments to Gerrit.
 
-Install the Jenkins GIT plugin (from the standard list) and the OpenStack version of the `Gerrit Trigger plugin`_.
+Install the Git and PostBuildScript plugins (from the standard list) and the OpenStack version of the `Gerrit Trigger plugin`_.
 
 .. _`Gerrit trigger plugin`: https://jenkins.openstack.org/view/All/job/gerrit-trigger-plugin-package/lastSuccessfulBuild/artifact/gerrithudsontrigger/target/gerrit-trigger.hpi
 
@@ -63,8 +63,8 @@ Click the "Test Connection" button to ensure this works.
 Click "Advanced..." to configure the actual Gerrit commands:
 
 * Started: blank
-* Successful: ``gerrit approve <CHANGE>,<PATCHSET> --message 'Integration Test Successful <BUILDS_STATS>' --verified <VERIFIED> --code-review <CODE_REVIEW>``
-* Failed: ``gerrit approve <CHANGE>,<PATCHSET> --message 'Integration Test Failed <BUILDS_STATS>' --verified <VERIFIED> --code-review <CODE_REVIEW>``
+* Successful: ``gerrit approve <CHANGE>,<PATCHSET> --message 'Integration Test Successful. http://heat-api.org/test_logs/$JOB_NAME/$BUILD_ID/log' --verified <VERIFIED> --code-review <CODE_REVIEW>``
+* Failed: ``gerrit approve <CHANGE>,<PATCHSET> --message 'Integration Test Failed. http://heat-api.org/test_logs/$JOB_NAME/$BUILD_ID/log' --verified <VERIFIED> --code-review <CODE_REVIEW>``
 * Unstable: blank
 
 These commands can be overridden per-project by setting them in the "Advanced..." section of the project configuration instead.
@@ -88,6 +88,8 @@ Create a new "Heat" test project with the following configuration:
 * Build:
 
   * Execute shell: ``/var/lib/jenkins/heat-integration/remote-test.sh``
+
+Click "Add post-build action" and select PostBuildScript. Then click "Add a schell or a Windows batch file", and set the "File script path" to ``/var/lib/jenkins/heat-integration/log-upload.sh``. This script uploads the logs to heat-api.org.
 
 Test with the dev server
 ------------------------
