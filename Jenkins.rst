@@ -17,7 +17,7 @@ Install Jenkins from RPM::
 
     sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
     sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
-    sudo yum install jenkins java-1.7.0-openjdk
+    sudo yum install -y jenkins java-1.7.0-openjdk
 
 Generate SSH keys::
 
@@ -29,9 +29,17 @@ Install the Git and PostBuildScript plugins (from the standard list) and the Ope
 
 .. _`Gerrit trigger plugin`: https://jenkins.openstack.org/view/All/job/gerrit-trigger-plugin-package/lastSuccessfulBuild/artifact/gerrithudsontrigger/target/gerrit-trigger.hpi
 
-Install a beaker configuration file at ``/var/lib/jenkins/.beaker_client/config`` that sets the ``HUB_URL``, ``AUTH_METHOD = "krbv"`` and ``KRB_REALM``. Set up the Kerberos keytab to allow Jenkins to authenticate to Beaker.
+Install a beaker configuration file at ``/var/lib/jenkins/.beaker_client/config`` that sets the ``HUB_URL``, ``AUTH_METHOD = "krbv"`` and ``KRB_REALM``.
+
+Install a keytab that can be used to authenticate Jenkins to Beaker. The keytab file itself should not be accessible to Jenkins. Run ``k5start`` (as root) to obtain and maintain a Kerberos ticket using the keytab::
+
+    sudo k5start -U -f $KEYTAB -b -L -K 30 -S HTTP -I $BEAKER_HUB -k /tmp/krb5cc_$(id -u jenkins) -o jenkins -p $PID_FILE
 
 Install the heat-integration-tests scripts at ``/var/lib/jenkins/heat-integration`` (or wherever). Edit ``config.sh`` to set the name of the test machine to provision, and enable copying of the Fedora ISO from the Jenkins server if it is on the same local network. Run the ``get-iso.sh`` script to get a copy of the Fedora ISO.
+
+Start Jenkins::
+
+    sudo systemctl start jenkins.service
 
 Configuration
 -------------
