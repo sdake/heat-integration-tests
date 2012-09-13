@@ -89,5 +89,6 @@ run_test() {
 }
 
 make_tarball() {
+    rm -f ${SOURCE_TARBALL:?}
     tar -cz * >${SOURCE_TARBALL:?}
 }
