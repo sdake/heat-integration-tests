@@ -2,12 +2,12 @@
 
 script_dir=$(dirname $0)
 
-if [ -z "$JENKINS_DIR" ] || [ -z "$JOB_NAME" ]; then
+if [ -z "$JENKINS_HOME" ] || [ -z "$JOB_NAME" ]; then
     echo "Jenkins Environment variables not found" >&2
     exit 1
 fi
 
-LOG_LOCATION=${JENKINS_DIR}/jobs/${JOB_NAME}/builds
+LOG_LOCATION=${JENKINS_HOME}/jobs/${JOB_NAME}/builds
 
 ORG=heat-api
 SITE=${ORG}.github.com

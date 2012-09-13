@@ -97,7 +97,7 @@ Create a new "Heat" test project with the following configuration:
 
   * Execute shell: ``/var/lib/jenkins/heat-integration/remote-test.sh``
 
-Click "Add post-build action" and select PostBuildScript. Then click "Add a schell or a Windows batch file", and set the "File script path" to ``/var/lib/jenkins/heat-integration/log-upload.sh``. This script uploads the logs to heat-api.org.
+Click "Add post-build action" and select PostBuildScript. Then click "Build steps", select "Execute shell" and set the Command to ``/var/lib/jenkins/heat-integration/log-publish.sh``. This script uploads the logs to heat-api.org.
 
 Test with the dev server
 ------------------------
