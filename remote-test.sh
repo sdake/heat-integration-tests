@@ -7,6 +7,7 @@ script_dir=$(dirname $0)
 . ${script_dir}/config.sh
 . ${script_dir}/test_machine/config.sh
 
+. ${script_dir}/test_machine/iso-functions.sh
 . ${script_dir}/beaker-provision.sh
 . ${script_dir}/remote-functions.sh
 

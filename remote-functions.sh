@@ -69,7 +69,7 @@ set_up() {
     fi
     scp ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${files} ${SSH_USER:-root}@${MACHINE}:
 
-    if [ "${ALLOW_ISO_COPY:0:1}" = "y" ] && [ -e ${IMAGE_DIR}/${ISO_IMAGE} ]; then
+    if [ "${ALLOW_ISO_COPY:0:1}" = "y" ] && [ -f ${IMAGE_DIR}/${ISO_IMAGE} ]; then
         echo "Copying Fedora ISO to test machine..." >&2
         scp ${SSH_KEY_FILE:+"-i"} $SSH_KEY_FILE ${IMAGE_DIR}/${ISO_IMAGE} ${SSH_USER:-root}@${MACHINE}:${IMAGE_DIR}
     fi
