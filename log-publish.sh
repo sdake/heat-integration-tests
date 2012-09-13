@@ -14,6 +14,11 @@ SITE=${ORG}.github.com
 LOG_DIR=test_logs
 
 clone_site() {
+
+    if ! grep -q github.com ~/.ssh/known_hosts; then
+        # Get host key
+        ssh -o StrictHostKeyChecking=no -T git@github.com
+    fi
     if [ ! -d $SITE ]; then
         git clone git@github.com:${ORG}/${SITE}.git
     fi
