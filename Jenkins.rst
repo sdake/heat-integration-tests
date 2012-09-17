@@ -85,6 +85,7 @@ Create a new "Heat" test project with the following configuration:
   * Name (under "Advanced..."): blank
   * Refspec (under "Advanced..."): ``$GERRIT_REFSPEC``
   * Branch Specifier: ``$GERRIT_BRANCH``
+  * Click "Advanced..." and check "Wipe out workspace before build"
 
 * Build Triggers: Gerrit event
 * Gerrit Trigger: Trigger on Change Merged
