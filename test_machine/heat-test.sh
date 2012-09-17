@@ -22,7 +22,7 @@ install_test_deps() {
     echo "Install test dependencies..." 1>&2
 
     pushd $HEAT_DIR
-    yum -y install `sed '/^$/d;/^\#/d' ./tools/test-requires-rpm`
+    sudo yum -y install `sed '/^$/d;/^\#/d' ./tools/test-requires-rpm`
     popd
 }
 
