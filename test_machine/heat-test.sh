@@ -28,6 +28,7 @@ install_test_deps() {
 
 run_tests() {
     pushd $HEAT_DIR
+    source ~/.openstack/keystonerc
     ./run_tests.sh -a tag=func
     TEST_RESULT=$?
     popd
