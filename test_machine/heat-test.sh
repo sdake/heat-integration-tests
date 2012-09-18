@@ -29,7 +29,7 @@ install_test_deps() {
 run_tests() {
     pushd $HEAT_DIR
     source ~/.openstack/keystonerc
-    ./run_tests.sh -a tag=func
+    ./run_tests.sh -a "tag=func,tag=F17"
     TEST_RESULT=$?
     if [ "${TEST_RESULT}" -ne 0 ]; then
         cat run_tests.err.log >&2
