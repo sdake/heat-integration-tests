@@ -31,6 +31,9 @@ run_tests() {
     source ~/.openstack/keystonerc
     ./run_tests.sh -a tag=func
     TEST_RESULT=$?
+    if [ "${TEST_RESULT}" -ne 0 ]; then
+        cat run_tests.err.log >&2
+    fi
     popd
 }
 
