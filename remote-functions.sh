@@ -4,7 +4,7 @@ wait_for_networking() {
     local server="$1"
 
     local retries=49
-    while ! ping -q -c 1 $server && ((retries-- > 0)); do
+    while ! ping -q -c 1 $server >/dev/null && ((retries-- > 0)); do
         echo "Waiting for host networking..." >&2
         sleep 5
     done
@@ -21,7 +21,7 @@ wait_for_reboot() {
     local server="$1"
 
     local retries=49
-    while ping -q -c 1 $server && ((retries-- > 0)); do
+    while ping -q -c 1 $server >/dev/null && ((retries-- > 0)); do
         echo "Waiting for host reboot..." >&2
         sleep 15
     done

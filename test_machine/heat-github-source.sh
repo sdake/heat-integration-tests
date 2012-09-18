@@ -12,7 +12,7 @@ get_source() {
     fi
 
     if [ -d $dest_dir ]; then sudo rm -rf $dest_dir; fi
-    git clone git://github.com/heat-api/heat.git $dest_dir
+    git clone -q git://github.com/heat-api/heat.git $dest_dir
 
     pushd $dest_dir
     echo "Cloned version $(git describe --always) from GitHub."

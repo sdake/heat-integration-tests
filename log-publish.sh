@@ -20,14 +20,14 @@ clone_site() {
         ssh -o StrictHostKeyChecking=no -T git@github.com
     fi
     if [ ! -d $SITE ]; then
-        git clone git@github.com:${ORG}/${SITE}.git
+        git clone -q git@github.com:${ORG}/${SITE}.git
     fi
 
     pushd $SITE
     git config user.name "heat-gerrit"
     git config user.email "scd@broked.org"
 
-    git pull --rebase
+    git pull -q --rebase
     [ -d $LOG_DIR ] || mkdir -p $LOG_DIR
     popd
 }
@@ -38,7 +38,7 @@ update_logs() {
     rsync -r ${LOG_LOCATION}/ ${LOG_DIR}/${JOB_NAME}
     git add $LOG_DIR
     git commit -m "Sync ${BUILD_TAG} build logs"
-    git push
+    git push -q
     popd
 }
 
