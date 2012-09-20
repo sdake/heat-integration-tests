@@ -26,6 +26,17 @@ install_test_deps() {
     popd
 }
 
+configure_floating_ips() {
+    local pub_if=lo
+
+    sudo openstack-config --set /etc/nova/nova.conf DEFAULT public_interface $pub_if
+    sudo systemctl restart openstack-nova-network.service
+
+    sudo nova-manage floating create 10.0.1.125/28
+
+    sudo iptables -t nat -I POSTROUTING -s 10.0.0.0/20 -j MASQUERADE -o $pub_if
+}
+
 run_tests() {
     pushd $HEAT_DIR
     source ~/.openstack/keystonerc
@@ -50,6 +61,7 @@ run_getting_started
 
 if [ "${TEST_RESULT}" = 0 ]; then
     install_test_deps
+    configure_floating_ips
     run_tests
 fi
 
