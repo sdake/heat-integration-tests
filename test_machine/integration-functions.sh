@@ -32,6 +32,7 @@ start_daemons() {
 
     systemctl start libvirtd.service
     # this is a hack to force udev rules to be applied to /dev/kvm
+    # https://bugzilla.redhat.com/show_bug.cgi?id=860658
     udevadm trigger
 }
 
